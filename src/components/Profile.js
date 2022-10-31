@@ -5,7 +5,6 @@ import "./Posts.css";
 const Profile = (props) => {
   const { token, posts, getPosts, username } = props;
 
-  console.log(posts, "profile posts");
   return (
     <>
       <header>

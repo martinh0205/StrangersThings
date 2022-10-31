@@ -32,61 +32,6 @@ const callAPI = async (endpointPath, defaultOptions = {}) => {
   return result;
 };
 
-/* const callAPI = async (endpointPath, defaultOptions = {}) => {
-  const options = {
-    headers: makeHeaders(defaultOptions.token),
-  };
-
-  if (defaultOptions.method) {
-    options.method = method;
-  }
-
-  if (defaultOptions.body) {
-    options.body = JSON.stringify(defaultOptions.body);
-  }
-
-  try {
-    const response = await fetch(`${BASEURL}${endpointPath}`, options);
-    const { success, error, data } = await response.json();
-
-    if (success) {
-      return {
-        error: null,
-        data: data,
-      };
-    } else {
-      return {
-        error: error.message,
-        data: null,
-      };
-    }
-  } catch (error) {
-    console.error(`Failed while calling ${endpointPath}:`, error);
-  }
-  return {
-    error: defaultOptions.defaultError,
-    data: null,
-  };
-
-  return result;
-};
-
-*/
-
-/* export const fetchPosts = async (token) => {
-  const { error, data } = await callAPI("/posts", {
-    bodyKey: "posts",
-    defaultError: "Failed to load Posts",
-  });
-
-  return {
-    error,
-    posts: data ? data.posts : [],
-  };
-};
-
-*/
-
 export const fetchPosts = async (token) => {
   try {
     const { success, error, data } = await callAPI("/posts", {
@@ -107,20 +52,6 @@ export const fetchPosts = async (token) => {
     return { error: "Failed to load Posts", posts: [] };
   }
 };
-
-/*
-export const fetchPosts = async (token) => {
-  try {
-    const response = await fetch(`${BASEURL}/posts`);
-    console.log("THIS IS THE RESPONSE", response);
-    const { data } = await response.json();
-    console.log("THIS IS DATA", data.posts);
-    return data.posts;
-  } catch (error) {
-    console.error("there was an error fetching posts");
-  }
-};
-*/
 
 export const registerUser = async (username, password) => {
   try {
@@ -192,36 +123,11 @@ export const loginUser = async (username, password) => {
   }
 };
 
-/*
-export const registerUser = async (username, password) => {
-  try {
-    const response = await fetch(`${BASEURL}/users/register`, {
-      method: "POST",
-      headers: makeHeaders(),
-      body: JSON.stringify({
-        user: {
-          username,
-          password,
-        },
-      }),
-    });
-    console.log("RESPONSE------>", response);
-    const data = await response.json();
-    console.log("------------data------------", data);
-    return data;
-  } catch (error) {
-    console.error("There was an error registering the user", error);
-  }
-};
-
-*/
-
 export const fetchUser = async (token) => {
   try {
     const { success, error, data } = await callAPI("/users/me", {
       token: token,
     });
-    console.log("data", data);
     if (success) {
       return {
         error: null,
@@ -242,22 +148,6 @@ export const fetchUser = async (token) => {
     };
   }
 };
-
-/* 
-export const fetchUser = async (token) => {
-  try {
-    const response = await fetch(`${BASEURL}/users/me`, {
-      headers: makeHeaders(token),
-    });
-    console.log("USER RESP BODY ------------>", response);
-    const { data } = await response.json();
-    console.log("USER DATA ----->", data);
-    return data;
-  } catch {
-    console.log(error);
-  }
-};
-*/
 
 export const createPost = async (
   token,
@@ -284,7 +174,6 @@ export const createPost = async (
         post: post,
       },
     });
-    console.log("data!", data);
     if (success) {
       return {
         error: null,
@@ -306,19 +195,7 @@ export const createPost = async (
   }
 };
 
-/* export const deletePost = aync (token, postId) => {
-  try {
-await fetch {`${BASEURL}/posts/${postId}`, {
-  method: "DELETE"
-}}
-  } catch {
-
-  }
-} 
-*/
-
 export const deletePost = async (token, postId) => {
-  console.log("dpost token", token);
   try {
     const { success, error, data } = await callAPI(`/posts/${postId}`, {
       method: "DELETE",

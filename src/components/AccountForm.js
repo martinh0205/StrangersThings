@@ -8,7 +8,6 @@ const AccountForm = ({ setToken }) => {
 
   const { action } = useParams();
   const history = useHistory();
-  console.log("action", action);
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -23,19 +22,6 @@ const AccountForm = ({ setToken }) => {
       history.push("/");
     }
   };
-
-  /* 
-  const onSubmitHandler = async (event) => {
-    event.preventDefault();
-    try {
-      const { data } = await registerUser(username, password);
-      setToken(data.token);
-      history.push("/");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-*/
 
   const title = action === "login" ? "Log In" : "Sign Up";
   return (
