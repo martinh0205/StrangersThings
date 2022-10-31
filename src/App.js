@@ -1,18 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { Home, Posts, AccountForm } from "./components";
+import {
+  Home,
+  Posts,
+  AccountForm,
+  PostCreateForm,
+  PostDetail,
+  Profile,
+} from "./components";
 import { Route, Switch, Link, useHistory } from "react-router-dom";
 import { fetchPosts, fetchUser } from "./api/api";
 
-const App = () => {
+const App = ({ username, filteredPosts }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(
-    window.localStorage.getItem("token") || ""
+    window.localStorage.getItem("token") || null
   );
   const [user, setUser] = useState(null);
 
   const history = useHistory();
 
+  const getPosts = async () => {
+    const { error, posts } = await fetchPosts(token);
+
+    if (error) {
+      console.error(error);
+    }
+    setPosts(posts);
+  };
+
   useEffect(() => {
+    getPosts();
+  }, [token]);
+
+  /* useEffect(() => {
     const getPosts = async () => {
       try {
         const result = await fetchPosts();
@@ -23,6 +43,8 @@ const App = () => {
     };
     getPosts();
   }, []);
+
+  */
 
   useEffect(() => {
     console.log("HERE");
@@ -37,12 +59,16 @@ const App = () => {
   }, [token]);
 
   useEffect(() => {
-    window.localStorage.setItem("token", token);
+    if (token) {
+      window.localStorage.setItem("token", token);
+    } else {
+      window.localStorage.removeItem("token");
+    }
   }, [token]);
 
   const logOut = () => {
     setToken(null);
-    setGuest(null);
+    setUser(null);
     history.push("/");
   };
 
@@ -56,6 +82,9 @@ const App = () => {
           Posts
         </Link>
         <div className="right menu">
+          <Link className="item" to="/Profile">
+            Profile
+          </Link>
           {token ? (
             <button onClick={logOut} className="item">
               Log Out
@@ -74,13 +103,39 @@ const App = () => {
       </nav>
       <Switch>
         <Route className="item" exact path="/">
-          <Home user={user} />
+          <Home username={user} />
+        </Route>
+        <Route className="item" path="/posts/create">
+          <PostCreateForm token={token} setPosts={setPosts} />
+        </Route>
+        <Route className="item" path="/posts/:postId">
+          <PostDetail
+            posts={posts}
+            token={token}
+            getPosts={getPosts}
+            username={user}
+          />
         </Route>
         <Route className="item" path="/Posts">
-          <Posts posts={posts} />
+          <Posts
+            posts={posts}
+            token={token}
+            setPosts={setPosts}
+            username={user}
+          />
         </Route>
         <Route className="item" path="/Account/:action">
           <AccountForm setToken={setToken} />
+        </Route>
+
+        <Route className="item" path="/Profile">
+          <Profile
+            posts={posts}
+            token={token}
+            getPosts={getPosts}
+            username={user}
+            filteredPosts={filteredPosts}
+          />
         </Route>
       </Switch>
     </div>

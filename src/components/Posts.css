@@ -1,0 +1,33 @@
+.posts-container {
+   padding: 30px;
+    justify-content: center;
+
+}
+
+.post-nav {
+
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.comments {
+    padding:5px;
+}
+
+h1 {
+    padding: 3px
+}
+
+.comment-form {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+
+
