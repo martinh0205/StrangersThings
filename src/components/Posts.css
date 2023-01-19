@@ -25,6 +25,53 @@ h1 {
     justify-content: center;
 }
 
+.ui.icon.input {
+    padding-right: 10px;
+}
+
+.ui.secondary.menu {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.ui.card {
+background-color: #dfdbd8;
+border: solid 1px #565c5e ;;
+}
+
+.post-item {
+    position: relative;
+    vertical-align: middle;
+    line-height: 1;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    flex: 0 0 auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: 0 0;
+    padding: .92857143em 1.14285714em;
+    text-transform: none;
+    color:rgb(0, 0, 0);
+    font-weight: bolder;
+    transition: background .1s ease,box-shadow .1s ease,color .1s ease;
+}
+
+.link {
+    font-size: 18px;
+}
+
+.negative.ui.button {
+    width: 30%;
+    align-self:flex-end
+}
+
+
+
+
+
+
 
 
 

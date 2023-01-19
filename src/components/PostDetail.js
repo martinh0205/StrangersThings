@@ -37,61 +37,66 @@ const PostDetail = (props) => {
 
   if (singlePost) {
     return (
-      <div className="posts-container">
-        <div className="ui fluid card">
-          <div className="content">
-            <div className="left floated aligned header">
-              <h1>{singlePost.title}</h1>
-            </div>
-
-            <p className="description">{singlePost.description}</p>
-
-            <p className="center aligned extra content">{singlePost.price}</p>
-            <p className="center aligned extra content">
-              {singlePost.author.username}
-            </p>
-            <p className="center aligned extra content">
-              {singlePost.location}
-            </p>
-
-            <>
-              <div
-                role="list"
-                className="ui divided relaxed list"
-                style={{ color: "#444", clear: "both" }}
-              >
-                {singlePost.messages.map((messages) => {
-                  return (
-                    <div role="listitem" className="item" key={messages._id}>
-                      {messages.fromUser.username !== username ? (
-                        <>
-                          <b>{messages.fromUser.username} </b>
-                          <p className="content">{messages.content}</p>
-                        </>
-                      ) : null}
-                    </div>
-                  );
-                })}
+      <div className="container">
+        <div className="posts-container">
+          <div className="ui fluid card">
+            <div className="content">
+              <div className="left floated aligned header">
+                <h1>{singlePost.title}</h1>
               </div>
-              {token ? (
-                <form className="comment-form" onSubmit={handleOnSubmit}>
-                  <input
-                    type="text"
-                    placeholder="New Comment"
-                    value={commentText}
-                    onChange={(event) => {
-                      setCommentText(event.target.value);
-                    }}
-                  ></input>
-                  <button type="submit">Send</button>
-                  {errorMessage ? (
-                    <p style={{ color: "red", backgroundColor: "pink" }}>
-                      Operation Failed {errorMessage}{" "}
-                    </p>
-                  ) : null}
-                </form>
-              ) : null}
-            </>
+
+              <p className="description">{singlePost.description}</p>
+
+              <p className="center aligned extra content">
+                Price: {singlePost.price}
+              </p>
+              <p className="center aligned extra content">
+                By: {singlePost.author.username}
+              </p>
+              <p className="center aligned extra content">
+                Location:{singlePost.location}
+              </p>
+
+              <>
+                <div
+                  role="list"
+                  className="ui divided relaxed list"
+                  style={{ color: "#444", clear: "both" }}
+                >
+                  {singlePost.messages.map((messages) => {
+                    return (
+                      <div role="listitem" className="item" key={messages._id}>
+                        {messages.fromUser.username !== username ? (
+                          <>
+                            <b>{messages.fromUser.username} </b>
+                            <p className="content">{messages.content}</p>
+                          </>
+                        ) : null}
+                      </div>
+                    );
+                  })}
+                </div>
+                {token ? (
+                  <form className="ui comments" onSubmit={handleOnSubmit}>
+                    <h3 className="ui diving header">Comments</h3>
+                    <input
+                      type="text"
+                      placeholder="New Comment"
+                      value={commentText}
+                      onChange={(event) => {
+                        setCommentText(event.target.value);
+                      }}
+                    ></input>
+                    <button type="submit">Send</button>
+                    {errorMessage ? (
+                      <p style={{ color: "red", backgroundColor: "pink" }}>
+                        Operation Failed {errorMessage}{" "}
+                      </p>
+                    ) : null}
+                  </form>
+                ) : null}
+              </>
+            </div>
           </div>
         </div>
       </div>

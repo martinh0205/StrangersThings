@@ -1,7 +1,75 @@
 body {
-    background-color:rgb(255, 255, 255);
+   background-color: #e2e2e2
     
 }
 
+.posts-container {
+    padding: 30px;
+     justify-content: center;
+ 
+ }
 
+
+.header { 
+    font-size: 25px;
+    font-weight: bold;
+    color: white
+    
+
+}
+
+.ui.menu {
+    background-color: #1d2d40;
+   
+}
+
+
+
+
+.ui.floating.message {
+    background-color: #c0c3c4;
+}
+
+.author {
+    font-weight: bold;
+}
+
+
+.container {
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.single-item {
+    position: relative;
+    vertical-align: middle;
+    line-height: 1;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    flex: 0 0 auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: 0 0;
+    padding: .92857143em 1.14285714em;
+    text-transform: none;
+    color:white;
+    font-weight: 600;
+    transition: background .1s ease,box-shadow .1s ease,color .1s ease;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
+  }
+
+  #page-container {
+    position: relative;
+    min-height: 100vh;
+  }
+
+ 
 

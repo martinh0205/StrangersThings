@@ -71,36 +71,51 @@ const App = ({ username, filteredPosts }) => {
     setUser(null);
     history.push("/");
   };
-
+  console.log("username", user);
   return (
-    <div className="container">
-      <nav className="ui pointing secondary menu">
-        <Link className="item" to="/">
-          Home
-        </Link>
-        <Link className="item" to="/Posts">
-          Posts
-        </Link>
-        <div className="right menu">
-          <Link className="item" to="/Profile">
-            Profile
+    <div id="page-container">
+      <nav className="ui menu">
+        <div className="header item">
+          <Link className="header" to="/">
+            Stranger's Things
           </Link>
+        </div>
+        <div className="item">
+          <Link className="single-item" to="/Posts">
+            Posts
+          </Link>
+        </div>
+
+        <div className="right menu">
+          {token ? (
+            <div className="item">
+              {" "}
+              <Link className="single-item" to="/Profile">
+                {user}'s Profile
+              </Link>
+            </div>
+          ) : null}
           {token ? (
             <button onClick={logOut} className="item">
-              Log Out
+              <div className="item">
+                <div className="single-item">Log Out</div>
+              </div>
             </button>
           ) : (
             <>
-              <Link className="item" to="/Account/login">
-                Login
-              </Link>
-              <Link className="item" to="/Account/register">
-                Sign Up
-              </Link>
+              <div className="item">
+                <Link className="single-item" to="/Account/login">
+                  Login
+                </Link>
+                <Link className="single-item" to="/Account/register">
+                  Sign Up
+                </Link>
+              </div>
             </>
           )}
         </div>
       </nav>
+
       <Switch>
         <Route className="item" exact path="/">
           <Home username={user} />
@@ -138,6 +153,9 @@ const App = ({ username, filteredPosts }) => {
           />
         </Route>
       </Switch>
+      <footer id="footer">
+        <nav className="ui menu"></nav>
+      </footer>
     </div>
   );
 };
